@@ -35,6 +35,7 @@
     "@types/react": "^17.0.53",
     "@types/react-dom": "^17.0.18",
     "history": "^4.10.1",
+    "process": "^0.11.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.9",
@@ -42,8 +43,8 @@
     "typescript": "~4.4.0"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
-    "build": "react-scripts --max_old_space_size=4096 build",
+    "start": "craco --max_old_space_size=4096 start",
+    "build": "craco --max_old_space_size=4096 build",
     "test": "react-scripts --max_old_space_size=4096 test",
     "eject": "react-scripts eject"
   },
@@ -62,5 +63,8 @@
     "last 4 edge version",
     "not dead",
     "not <0.2%"
-  ]
+  ],
+  "devDependencies": {
+    "@craco/craco": "^7.0.0"
+  }
 }
