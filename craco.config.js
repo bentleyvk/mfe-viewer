@@ -35,7 +35,7 @@ module.exports = {
           // },
           filename: "remoteEntry.js",
           exposes: {
-            "./Viewer": "./src/Viewer",
+            "./Viewer": "./src/ViewerWrapper",
           },
           shared: [
             {
@@ -48,15 +48,23 @@ module.exports = {
                 singleton: true,
                 requiredVersion: deps["react-dom"],
               },
+              "@itwin/itwinui-react": {
+                singleton: true,
+                requiredVersion: deps["@itwin/itwinui-react"],
+              },
+              "@itwin/itwinui-layouts-react": {
+                singleton: true,
+                requiredVersion: deps["@itwin/itwinui-layouts-react"],
+              },
             },
           ],
         }),
       ];
 
-      webpackConfig.optimization = {
-        ...webpackConfig.optimization,
-        splitChunks: false,
-      };
+      // webpackConfig.optimization = {
+      //   ...webpackConfig.optimization,
+      //   splitChunks: false,
+      // };
 
       return webpackConfig;
     },

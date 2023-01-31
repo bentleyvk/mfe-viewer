@@ -8,17 +8,22 @@ import "./App.scss";
 import { BrowserAuthorizationClient } from "@itwin/browser-authorization";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import MyViewer from "./Viewer";
+import ViewerWrapper from "./ViewerWrapper";
+// import { Button } from "@itwin/itwinui-react";
 
-(globalThis as any).IMJS_URL_PREFIX = "dev-"
+// const MyViewer = React.lazy(() => import("./Viewer"));
+import { createBrowserHistory } from "history";
+let history = createBrowserHistory();
+
+(globalThis as any).IMJS_URL_PREFIX = "dev-";
 
 const App: React.FC = () => {
   const authClient = useMemo(
     () =>
       new BrowserAuthorizationClient({
-        scope: "imodelaccess:read imodels:read realitydata:read" ?? "",
+        scope: "imodelaccess:read imodels:read realitydata:read projects:read itwins:read projects:modify itwins:modify" ?? "",
         clientId: "spa-lGqOKmVDZqd0SPiPPzI5YlHuN",
-        redirectUri: "http://localhost:3000/signin-callback" ?? "",
+        redirectUri: "http://localhost:3001/signin-callback" ?? "",
         postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
         responseType: "code",
         authority: "https://qa-ims.bentley.com",
@@ -39,9 +44,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     authClient.onAccessTokenChanged.addListener((token: string) => {
-      setAccessToken(token)
-    })
-  }, [authClient]) 
+      setAccessToken(token);
+    });
+  }, [authClient]);
 
   const login = useCallback(async () => {
     try {
@@ -55,10 +60,18 @@ const App: React.FC = () => {
     void login();
   }, [login]);
 
+  const [paths, setPaths] = useState<string[]>(history.location.pathname.split("/").filter(Boolean));
+  useEffect(() => {
+    const unlisten = history.listen((listener) => {
+      console.log(listener);
+      setPaths(listener.pathname.split("/").filter(Boolean))
+    });
+    return () => unlisten();
+  }, [])
 
   return (
     <div className="viewer-container">
-      <MyViewer accessToken={accessToken} />
+      <ViewerWrapper accessToken={accessToken} router={ { paths, goTo: (url) => history.push(url) } } />
     </div>
   );
 };

@@ -1,0 +1,32 @@
+.select-itwins-search-input {
+  max-width: 200px;
+}
+
+.select-itwins-search-input-search-icon {
+  cursor: text;
+}
+
+.select-itwins-grid {
+  .iac-grid-structure {
+    // Margins are taken from iTwinUI-layouts
+    margin: 0;
+  }
+
+  // No results message goes out of bounds without these
+  .iac-no-results {
+    position: unset;
+    transform: unset;
+    top: unset;
+    left: unset;
+  }
+
+  .iui-tile-thumbnail .iui-thumbnail-icon {
+    width: 100%;
+    height: 100%;
+
+    > * {
+      width: 64px;
+      height: 64px;
+    }
+  }
+}

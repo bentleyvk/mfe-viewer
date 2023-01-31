@@ -29,10 +29,18 @@ import { BeEvent } from "@itwin/core-bentley";
 
 (globalThis as any).IMJS_URL_PREFIX = "dev-";
 
-const iTwinId = "d667d711-a0ee-4843-957b-a8c3ed1caad2";
-const iModelId = "89e0abd9-fdff-441d-adb3-2e008bc6b217";
+// const iTwinId = "d667d711-a0ee-4843-957b-a8c3ed1caad2";
+// const iModelId = "89e0abd9-fdff-441d-adb3-2e008bc6b217";
 
-const MyViewer = ({ accessToken }: { accessToken: string | undefined }) => {
+const MyViewer = ({
+  accessToken,
+  itwinId,
+  imodelId,
+}: {
+  accessToken: string | undefined;
+  itwinId: string;
+  imodelId: string;
+}) => {
   const tokenListeners = useRef<((token: string) => void)[]>([]);
 
   // const [token, setToken] = useState<string>();
@@ -104,6 +112,26 @@ const MyViewer = ({ accessToken }: { accessToken: string | undefined }) => {
 
   console.log({ accessToken });
 
+  console.log(new URLSearchParams(new URL(window.location.href).search));
+
+  const uiProviders = useMemo(
+    () => [
+      new ViewerNavigationToolsProvider(),
+      new ViewerContentToolsProvider({
+        vertical: {
+          measureGroup: false,
+        },
+      }),
+      new ViewerStatusbarItemsProvider(),
+      new TreeWidgetUiItemsProvider(),
+      new PropertyGridUiItemsProvider({
+        enableCopyingPropertyText: true,
+      }),
+      new MeasureToolsUiItemsProvider(),
+    ],
+    []
+  );
+
   return (
     <div className="viewer-container">
       {!accessToken && (
@@ -115,26 +143,13 @@ const MyViewer = ({ accessToken }: { accessToken: string | undefined }) => {
       )}
       {accessToken && (
         <Viewer
-          iTwinId={iTwinId ?? ""}
-          iModelId={iModelId ?? ""}
+          iTwinId={itwinId ?? ""}
+          iModelId={imodelId ?? ""}
           authClient={authClient}
           viewCreatorOptions={viewCreatorOptions}
           enablePerformanceMonitors={true} // see description in the README (https://www.npmjs.com/package/@itwin/web-viewer-react)
           onIModelAppInit={onIModelAppInit}
-          uiProviders={[
-            new ViewerNavigationToolsProvider(),
-            new ViewerContentToolsProvider({
-              vertical: {
-                measureGroup: false,
-              },
-            }),
-            new ViewerStatusbarItemsProvider(),
-            new TreeWidgetUiItemsProvider(),
-            new PropertyGridUiItemsProvider({
-              enableCopyingPropertyText: true,
-            }),
-            new MeasureToolsUiItemsProvider(),
-          ]}
+          uiProviders={uiProviders}
         />
       )}
     </div>
