@@ -28,7 +28,7 @@ import * as serviceWorker from "./serviceWorker";
 //   );
 // }
 
-const redirectUrl = new URL("http://localhost:3000/signin-callback");
+const redirectUrl = new URL(`${window.location.origin}/signin-callback`);
 if (redirectUrl.pathname === window.location.pathname) {
   BrowserAuthorizationCallbackHandler.handleSigninCallback(
     redirectUrl.toString()
