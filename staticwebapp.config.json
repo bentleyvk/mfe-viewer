@@ -1,9 +1,9 @@
 {
   "navigationFallback": {
-     "rewrite": "index.html",
-     "exclude": ["/static/media/*.{png,jpg,jpeg,gif,bmp}",   "/static/css/*"]
+    "rewrite": "index.html",
+    "exclude": ["*.{svg,png,jpg,gif}", "*.{css,scss}", "*.js"]
   },
   "mimeTypes": {
-      ".json": "text/json"
+    ".json": "text/json"
   }
 }
