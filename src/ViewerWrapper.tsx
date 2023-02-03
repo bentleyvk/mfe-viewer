@@ -24,6 +24,7 @@ const ViewerWrapper = ({
 }) => {
   console.log(router.paths);
 
+  // /:itwinid/:imodelId/viewer
   if (router.paths.length === 3 && router.paths[2] === "viewer") {
     return (
       <Suspense
