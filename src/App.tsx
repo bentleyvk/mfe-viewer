@@ -23,7 +23,7 @@ const App: React.FC = () => {
       new BrowserAuthorizationClient({
         scope: "imodelaccess:read imodels:read realitydata:read projects:read itwins:read projects:modify itwins:modify" ?? "",
         clientId: "spa-lGqOKmVDZqd0SPiPPzI5YlHuN",
-        redirectUri: "http://localhost:3001/signin-callback" ?? "",
+        redirectUri: `${window.location.origin}/signin-callback` ?? "",
         postSignoutRedirectUri: process.env.IMJS_AUTH_CLIENT_LOGOUT_URI,
         responseType: "code",
         authority: "https://qa-ims.bentley.com",
