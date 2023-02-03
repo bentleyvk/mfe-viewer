@@ -3,10 +3,9 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import React, { useState, Suspense } from "react";
+import React, { Suspense } from "react";
 
 // import MyViewer from "./Viewer";
-import { Button } from "@itwin/itwinui-react";
 import SelectiTwin from "./SelectiTwin";
 import SelectiModels from "./SelectiModels";
 import { SvgIModelLoader } from "@itwin/itwinui-illustrations-react";

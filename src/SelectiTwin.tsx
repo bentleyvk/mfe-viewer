@@ -1,6 +1,5 @@
 // Copyright (c) Bentley Systems
 import {
-  ProjectFull,
   ProjectGrid as ITwinsGrid,
   ProjectGridProps as ITwinsGridProps,
 } from "@itwin/imodel-browser-react";
