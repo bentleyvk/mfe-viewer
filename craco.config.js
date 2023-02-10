@@ -16,12 +16,12 @@ module.exports = {
     configure: (webpackConfig, { env, paths }) => {
       webpackConfig.output.publicPath = "auto";
 
-      // const htmlWebpackPlugin = webpackConfig.plugins.find((plugin) => plugin.constructor.name === "HtmlWebpackPlugin");
+      const htmlWebpackPlugin = webpackConfig.plugins.find((plugin) => plugin.constructor.name === "HtmlWebpackPlugin");
 
-      // htmlWebpackPlugin.userOptions = {
-      //   ...htmlWebpackPlugin.userOptions,
-      //   publicPath: paths.publicUrlOrPath,
-      // };
+      htmlWebpackPlugin.userOptions = {
+        ...htmlWebpackPlugin.userOptions,
+        publicPath: paths.publicUrlOrPath,
+      };
 
       webpackConfig.resolve.fallback = webpackConfig.resolve.fallback || {}
       webpackConfig.resolve.fallback.process = require.resolve('process/browser')
