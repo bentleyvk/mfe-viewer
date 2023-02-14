@@ -42,19 +42,15 @@ module.exports = {
               // ...deps,
               react: {
                 singleton: true,
-                requiredVersion: deps["react"],
               },
               "react-dom": {
                 singleton: true,
-                requiredVersion: deps["react-dom"],
               },
               "@itwin/itwinui-react": {
                 singleton: true,
-                requiredVersion: deps["@itwin/itwinui-react"],
               },
               "@itwin/itwinui-layouts-react": {
                 singleton: true,
-                requiredVersion: deps["@itwin/itwinui-layouts-react"],
               },
             },
           ],
