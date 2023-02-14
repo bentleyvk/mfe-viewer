@@ -25,7 +25,8 @@ import { BeEvent } from "@itwin/core-bentley";
 
 // Set this for i18n
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-(globalThis as any).ITWIN_VIEWER_HOME = "http://localhost:3001"; //window.location.origin;
+(globalThis as any).ITWIN_VIEWER_HOME = new URL(document.currentScript?.getAttribute("src") ?? import.meta.url)
+.origin;
 
 (globalThis as any).IMJS_URL_PREFIX = "dev-";
 

@@ -23,7 +23,7 @@ const SelectiModels = ({
   itwinId,
 }: {
   accessToken: string | undefined;
-  router: { paths: string[]; goTo: (url: string) => void };
+  router: { goTo: (url: string) => void };
   itwinId: string;
 }) => {
   // const { publicAccessToken } = useAuth();

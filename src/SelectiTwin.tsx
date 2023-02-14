@@ -30,7 +30,7 @@ const SelectiTwin = ({
   router: { goTo },
 }: {
   accessToken: string | undefined;
-  router: { paths: string[]; goTo: (url: string) => void };
+  router: { goTo: (url: string) => void };
 }) => {
   // const { publicAccessToken } = useAuth();
   // const navigate = useNavigate();

@@ -60,18 +60,18 @@ const App: React.FC = () => {
     void login();
   }, [login]);
 
-  const [paths, setPaths] = useState<string[]>(history.location.pathname.split("/").filter(Boolean));
+  const [path, setPath] = useState<string>(history.location.pathname);
   useEffect(() => {
     const unlisten = history.listen((listener) => {
       console.log(listener);
-      setPaths(listener.pathname.split("/").filter(Boolean))
+      setPath(listener.pathname)
     });
     return () => unlisten();
   }, [])
 
   return (
     <div className="viewer-container">
-      <ViewerWrapper accessToken={accessToken} router={ { paths, goTo: (url) => history.push(url) } } />
+      <ViewerWrapper accessToken={accessToken} router={ { path, goTo: (url) => history.push(url) } } />
     </div>
   );
 };
