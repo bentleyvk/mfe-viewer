@@ -50,10 +50,12 @@ module.exports = {
               },
               "@itwin/itwinui-react": {
                 singleton: true,
+                requiredVersion: false,
                 // requiredVersion: deps["@itwin/itwinui-react"],
               },
               "@itwin/itwinui-layouts-react": {
                 singleton: true,
+                requiredVersion: false,
                 // requiredVersion: deps["@itwin/itwinui-layouts-react"],
               },
             },
