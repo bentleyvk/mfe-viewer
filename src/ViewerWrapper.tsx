@@ -14,6 +14,11 @@ import "@itwin/itwinui-layouts-css/styles.css";
 
 const Viewer = React.lazy(() => import("./MyViewer"));
 
+const getSourceUrl = () => {
+  return new URL(document.currentScript?.getAttribute("src") ?? import.meta.url) // fails when already loaded...
+    .origin;
+};
+
 const ViewerWrapper = ({
   accessToken,
   router,
@@ -21,11 +26,12 @@ const ViewerWrapper = ({
   accessToken: string | undefined;
   router: { path: string; goTo: (url: string) => void };
 }) => {
-  const paths = router.path.split("/").filter(Boolean)
+  const paths = router.path.split("/").filter(Boolean);
   console.log(paths);
+  console.log("getSourceUrl", getSourceUrl());
 
-const getElement = () => {
-    // /:itwinid/:imodelId/viewer
+  const getElement = () => {
+    // /:iTwinId/:iModelId/viewer
     if (paths.length === 3 && paths[2] === "viewer") {
       return (
         <Suspense
@@ -47,13 +53,15 @@ const getElement = () => {
           <Viewer accessToken={accessToken} itwinId={paths[0]} imodelId={paths[1]} />
         </Suspense>
       );
+    // /:iTwinId/imodels
     } else if (paths.length === 2 && paths[1] === "imodels") {
       return <SelectiModels accessToken={accessToken} router={router} itwinId={paths[0]} />;
+    // /
     } else {
       return <SelectiTwin accessToken={accessToken} router={router} />;
     }
-}
-return <div style={{ width: '100%', overflow: 'auto', minHeight: '100%' }}>{getElement()}</div>
+  };
+  return <div style={{ width: "100%", overflow: "auto", minHeight: "100%" }}>{getElement()}</div>;
 };
 
 export default ViewerWrapper;
