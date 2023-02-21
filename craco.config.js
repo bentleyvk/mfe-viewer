@@ -23,16 +23,10 @@ module.exports = {
         publicPath: paths.publicUrlOrPath,
       };
 
-      webpackConfig.resolve.fallback = webpackConfig.resolve.fallback || {}
-      webpackConfig.resolve.fallback.process = require.resolve('process/browser')
-
       webpackConfig.plugins = [
         ...webpackConfig.plugins,
         new ModuleFederationPlugin({
           name: "testViewer",
-          // remotes: {
-          //   app2: "app1@http://localhost:3000/remoteEntry.js",
-          // },
           filename: "remoteEntry.js",
           exposes: {
             "./Viewer": "./src/ViewerWrapper",
@@ -42,34 +36,24 @@ module.exports = {
               // ...deps,
               react: {
                 singleton: true,
-                // requiredVersion: ">=16.8.0",
                 requiredVersion: deps["react"],
               },
               "react-dom": {
                 singleton: true,
-                // requiredVersion: ">=16.8.0",
                 requiredVersion: deps["react-dom"],
               },
               "@itwin/itwinui-react": {
                 singleton: true,
-                // requiredVersion: "^1.43.0",
-                // requiredVersion: false,
                 requiredVersion: deps["@itwin/itwinui-react"],
               },
               "@itwin/itwinui-layouts-react": {
                 singleton: true,
-                // requiredVersion: false,
                 requiredVersion: deps["@itwin/itwinui-layouts-react"],
               },
             },
           ],
         }),
       ];
-
-      // webpackConfig.optimization = {
-      //   ...webpackConfig.optimization,
-      //   splitChunks: false,
-      // };
 
       return webpackConfig;
     },
